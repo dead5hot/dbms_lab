@@ -30,7 +30,38 @@ create table account(
 	balance int,
 	FOREIGN KEY(branch_name) REFERENCES branch(branch_name)
 );
-insert into table branch values();
+
+insert into table branch values('dhanbad001','dhanbad',100000);
+insert into table branch values('dhanbad002','dhanbad',70000);
+insert into table branch values('patna001','patna',200000);
+insert into table branch values('kolkata023','kolkata',150000);
+insert into table branch values('rishikesh045','rishikesh',75000);
+
+insert into table customer values('abhijeet','dhanbad001',20000);
+insert into table customer values('amit','dhanbad002',40000);
+insert into table customer values('rohan','patna001',10000);
+insert into table customer values('ankit);
+insert into table customer values();
+
+insert into table loan values();
+insert into table loan values();
+insert into table loan values();
+insert into table loan values();
+insert into table loan values();
+
+insert into table borrower values();
+insert into table borrower values();
+insert into table borrower values();
+insert into table borrower values();
+insert into table borrower values();
+
+insert into table account values();
+insert into table account values();
+insert into table account values();
+insert into table account values();
+insert into table account values();
+
+
 CREATE VIEW Query1(C_Name,B_Name,B_city)
 AS SELECT customer.customer_name, branch.branch_name, branch.branch_city
 FROM customer, branch, loan
