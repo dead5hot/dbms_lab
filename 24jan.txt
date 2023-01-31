@@ -1,0 +1,297 @@
+MariaDB [(none)]> use je0020
+Database changed
+MariaDB [je0020]> create table branch(
+    -> branch_name varchar(20),
+    -> branch_city varchar(20),
+    -> assets int NOT NULL,
+    -> PRIMARY KEY(branch_name)
+    -> );
+Query OK, 0 rows affected (0.036 sec)
+
+MariaDB [je0020]> create table customer(
+    -> customer_name varchar(20),
+    -> branch_name varchar(20),
+    -> customer_city varchar(20),
+    -> PRIMARY KEY (customer_name),
+    -> FOREIGN KEY(branch_name) REFERENCES branch(branch_name)
+    -> );
+Query OK, 0 rows affected (0.038 sec)
+
+MariaDB [je0020]> create table loan(
+    -> loan_number varchar(20),
+    -> branch_name varchar(20),
+    -> amount int,
+    -> PRIMARY KEY (loan_number),
+    -> FOREIGN KEY(branch_name) REFERENCES customer(branch_name)
+    -> );
+Query OK, 0 rows affected (0.039 sec)
+
+MariaDB [je0020]> create table borrower(
+    -> customer_name varchar(20),
+    -> loan_number varchar(20),
+    -> FOREIGN KEY(customer_name) REFERENCES customer(customer_name),
+    -> FOREIGN KEY(loan_number) REFERENCES loan(loan_number)
+    -> );
+Query OK, 0 rows affected (0.040 sec)
+
+MariaDB [je0020]> create table account(
+    -> account_number int,
+    -> branch_name varchar(20),
+    -> balance int,
+    -> FOREIGN KEY(branch_name) REFERENCES branch(branch_name)
+    -> );
+Query OK, 0 rows affected (0.025 sec)
+
+MariaDB [je0020]> show tables;
++------------------+
+| Tables_in_je0020 |
++------------------+
+| account          |
+| borrower         |
+| branch           |
+| customer         |
+| loan             |
++------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [je0020]> insert into branch values('SBI001D','Dhanbad',100000);
+Query OK, 1 row affected (0.015 sec)
+
+MariaDB [je0020]> insert into branch values('PNB002T','Tatanagar',70000);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [je0020]> insert into branch values('YBI002P','Patna',200000);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into branch values('ISI002K','Kolkata',150000);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into branch values('BOB011R','Rishikesh',75000);
+Query OK, 1 row affected (0.020 sec)
+
+MariaDB [je0020]> select * from branch;
++-------------+-------------+--------+
+| branch_name | branch_city | assets |
++-------------+-------------+--------+
+| BOB011R     | Rishikesh   |  75000 |
+| ISI002K     | Kolkata     | 150000 |
+| PNB002T     | Tatanagar   |  70000 |
+| SBI001D     | Dhanbad     | 100000 |
+| YBI002P     | Patna       | 200000 |
++-------------+-------------+--------+
+5 rows in set (0.000 sec)
+
+MariaDB [je0020]> insert into customer values('Liam','SBI001D','Patna');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into customer values('John','PNB002T','Bombay');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into customer values('Luke','YBI002P','Delhi');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into customer values('Levi','BOB011R','Shimla');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into customer values('Emma','SBI001D','Gaya');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> select * from customer;
++---------------+-------------+---------------+
+| customer_name | branch_name | customer_city |
++---------------+-------------+---------------+
+| Emma          | SBI001D     | Gaya          |
+| John          | PNB002T     | Bombay        |
+| Levi          | BOB011R     | Shimla        |
+| Liam          | SBI001D     | Patna         |
+| Luke          | YBI002P     | Delhi         |
++---------------+-------------+---------------+
+5 rows in set (0.000 sec)
+
+MariaDB [je0020]> insert into loan values('5001','SBI001D',50001);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into loan values('5002','PNB002T',5000);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into loan values('5003','YBI002P',900);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into loan values('5004','BOB011R',10000);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into loan values('5005','SBI001D',75000);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> select * from loan;
++-------------+-------------+--------+
+| loan_number | branch_name | amount |
++-------------+-------------+--------+
+| 5001        | SBI001D     |  50001 |
+| 5002        | PNB002T     |   5000 |
+| 5003        | YBI002P     |    900 |
+| 5004        | BOB011R     |  10000 |
+| 5005        | SBI001D     |  75000 |
++-------------+-------------+--------+
+5 rows in set (0.000 sec)
+
+MariaDB [je0020]> insert into borrower values('Emma','5001');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into borrower values('Liam','5005');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into borrower values('John','5002');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into borrower values('Luke','5003');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into borrower values('Levi','5004');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [je0020]> select * from borrower;
++---------------+-------------+
+| customer_name | loan_number |
++---------------+-------------+
+| Emma          | 5001        |
+| Liam          | 5005        |
+| John          | 5002        |
+| Luke          | 5003        |
+| Levi          | 5004        |
++---------------+-------------+
+5 rows in set (0.000 sec)
+
+MariaDB [je0020]> insert into account values(15025057,'PNB002T',150000);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into account values(15025058,'ISI002K',50000);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into account values(15025059,'SBI001D',20000);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into account values(15025060,'YBI002P',1000);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into account values(15025061,'BOB011R',200000);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> select * from account;
++----------------+-------------+---------+
+| account_number | branch_name | balance |
++----------------+-------------+---------+
+|       15025057 | PNB002T     |  150000 |
+|       15025058 | ISI002K     |   50000 |
+|       15025059 | SBI001D     |   20000 |
+|       15025060 | YBI002P     |    1000 |
+|       15025061 | BOB011R     |  200000 |
++----------------+-------------+---------+
+5 rows in set (0.000 sec)
+
+MariaDB [je0020]> CREATE or REPLACE VIEW Query1(C_Name,B_Name,B_city)
+    -> AS SELECT customer.customer_name, branch.branch_name, branch.branch_city
+    -> FROM customer, branch, loan, borrower
+    -> WHERE loan.amount>50000 and loan.loan_number=borrower.loan_number and customer.customer_name=borrower.customer_name and loan.branch_name=branch.branch_name;
+Query OK, 0 rows affected (0.029 sec)
+
+MariaDB [je0020]> select * from Query1;
++--------+---------+---------+
+| C_Name | B_Name  | B_city  |
++--------+---------+---------+
+| Emma   | SBI001D | Dhanbad |
+| Liam   | SBI001D | Dhanbad |
++--------+---------+---------+
+2 rows in set (0.001 sec)
+
+MariaDB [je0020]> CREATE or REPLACE VIEW Query2(C_Name)
+    -> AS SELECT customer.customer_name
+    -> FROM customer
+    -> WHERE customer.customer_city='Bombay';
+Query OK, 0 rows affected (0.026 sec)
+
+MariaDB [je0020]> select * from Query2;
++--------+
+| C_Name |
++--------+
+| John   |
++--------+
+1 row in set (0.001 sec)
+
+MariaDB [je0020]> CREATE or REPLACE VIEW Query3(ACC_Number,B_Name,B_Assets)
+    -> AS SELECT account.account_number, branch.branch_name, branch.assets
+    -> FROM account, branch
+    -> WHERE account.balance>100000 and branch.branch_name=account.branch_name;
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [je0020]> select * from Query3;
++------------+---------+----------+
+| ACC_Number | B_Name  | B_Assets |
++------------+---------+----------+
+|   15025057 | PNB002T |    70000 |
+|   15025061 | BOB011R |    75000 |
++------------+---------+----------+
+2 rows in set (0.001 sec)
+
+MariaDB [je0020]> CREATE or REPLACE VIEW Query4(C_Name,B_Name,B_city,Lona_no)
+    -> AS SELECT customer.customer_name, customer.branch_name, branch.branch_city, borrower.loan_number
+    -> FROM customer, branch, borrower
+    -> WHERE customer.customer_name=borrower.customer_name and customer.branch_name=branch.branch_name;
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [je0020]> select * from Query4;
++--------+---------+-----------+---------+
+| C_Name | B_Name  | B_city    | Lona_no |
++--------+---------+-----------+---------+
+| Emma   | SBI001D | Dhanbad   | 5001    |
+| Liam   | SBI001D | Dhanbad   | 5005    |
+| John   | PNB002T | Tatanagar | 5002    |
+| Luke   | YBI002P | Patna     | 5003    |
+| Levi   | BOB011R | Rishikesh | 5004    |
++--------+---------+-----------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [je0020]> DELETE borrower FROM borrower INNER JOIN loan WHERE loan.amount<1000 and borrower.loan_number=loan.loan_number;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> select * from borrower;
++---------------+-------------+
+| customer_name | loan_number |
++---------------+-------------+
+| Emma          | 5001        |
+| Liam          | 5005        |
+| John          | 5002        |
+| Levi          | 5004        |
++---------------+-------------+
+4 rows in set (0.000 sec)
+
+MariaDB [je0020]> select * from loan;
++-------------+-------------+--------+
+| loan_number | branch_name | amount |
++-------------+-------------+--------+
+| 5001        | SBI001D     |  50001 |
+| 5002        | PNB002T     |   5000 |
+| 5003        | YBI002P     |    900 |
+| 5004        | BOB011R     |  10000 |
+| 5005        | SBI001D     |  75000 |
++-------------+-------------+--------+
+5 rows in set (0.000 sec)
+
+MariaDB [je0020]> UPDATE loan, branch
+    -> SET loan.amount = loan.amount + 10000
+    -> WHERE branch.assets>80000 and branch.branch_name=loan.branch_name;
+Query OK, 3 rows affected (0.004 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+MariaDB [je0020]> select * from loan;
++-------------+-------------+--------+
+| loan_number | branch_name | amount |
++-------------+-------------+--------+
+| 5001        | SBI001D     |  60001 |
+| 5002        | PNB002T     |   5000 |
+| 5003        | YBI002P     |  10900 |
+| 5004        | BOB011R     |  10000 |
+| 5005        | SBI001D     |  85000 |
++-------------+-------------+--------+
+5 rows in set (0.000 sec)
+
