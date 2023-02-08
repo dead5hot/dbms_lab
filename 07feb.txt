@@ -1,0 +1,241 @@
+MariaDB [(none)]> use je0020
+Database changed
+MariaDB [je0020]> create table Student_information(
+    -> student_name varchar(30),
+    -> student_id int,
+    -> age real,
+    -> PRIMARY KEY(student_id)
+    -> );
+Query OK, 0 rows affected (0.019 sec)
+
+MariaDB [je0020]> create table Marks_details(
+    -> sid int,
+    -> gpa real,
+    -> grade varchar(3),
+    -> FOREIGN KEY(sid) REFERENCES Student_information(student_id)
+    -> );
+Query OK, 0 rows affected (0.039 sec)
+
+MariaDB [je0020]> create table Attendance(
+    -> sid int,
+    -> perc_attendance real,
+    -> FOREIGN KEY(sid) REFERENCES Student_information(student_id)
+    -> );
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [je0020]> create table Sports_enrollment(
+    -> s_name varchar(30),
+    -> sports_id int,
+    -> activity varchar(30)
+    -> );
+Query OK, 0 rows affected (0.036 sec)
+
+MariaDB [je0020]> insert into Student_information values('Liam',9221,21);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into Student_information values('Noah',9222,22);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Student_information values('John',9223,23);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into Student_information values('Owen',9224,26);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Student_information values('Luke',9225,20);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Student_information values('Jack',9226,19);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> SELECT * FROM Student_information;
++--------------+------------+------+
+| student_name | student_id | age  |
++--------------+------------+------+
+| Liam         |       9221 |   21 |
+| Noah         |       9222 |   22 |
+| John         |       9223 |   23 |
+| Owen         |       9224 |   26 |
+| Luke         |       9225 |   20 |
+| Jack         |       9226 |   19 |
++--------------+------------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [je0020]> insert into Marks_details values(9226,9.8,'A+');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into Marks_details values(9225,9.2,'A');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Marks_details values(9224,8.0,'B+');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into Marks_details values(9223,7.5,'B');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Marks_details values(9222,6.0,'C+');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Marks_details values(9221,5.7,'C');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> SELECT * FROM Marks_details;
++------+------+-------+
+| sid  | gpa  | grade |
++------+------+-------+
+| 9226 |  9.8 | A+    |
+| 9225 |  9.2 | A     |
+| 9224 |    8 | B+    |
+| 9223 |  7.5 | B     |
+| 9222 |    6 | C+    |
+| 9221 |  5.7 | C     |
++------+------+-------+
+6 rows in set (0.000 sec)
+
+MariaDB [je0020]> insert into Attendance values(9221,0);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into Attendance values(9223,92.7);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Attendance values(9222,80.1);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into Attendance values(9224,75.4);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Attendance values(9226,60.5);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Attendance values(9225,77.2);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> SELECT * FROM Attendance;
++------+-----------------+
+| sid  | perc_attendance |
++------+-----------------+
+| 9221 |               0 |
+| 9223 |            92.7 |
+| 9222 |            80.1 |
+| 9224 |            75.4 |
+| 9226 |            60.5 |
+| 9225 |            77.2 |
++------+-----------------+
+6 rows in set (0.000 sec)
+
+MariaDB [je0020]> insert into Sports_enrollment values('Liam',001,'Table tennis');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into Sports_enrollment values('Noah',002,'Chess');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Sports_enrollment values('John',003,'Cricket');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> insert into Sports_enrollment values('Owen',004,'Football');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Sports_enrollment values('Luke',005,'Cycle Racing');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> insert into Sports_enrollment values('Jack',006,'Badminton');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [je0020]> SELECT * FROM Sports_enrollment;
++--------+-----------+--------------+
+| s_name | sports_id | activity     |
++--------+-----------+--------------+
+| Liam   |         1 | Table tennis |
+| Noah   |         2 | Chess        |
+| John   |         3 | Cricket      |
+| Owen   |         4 | Football     |
+| Luke   |         5 | Cycle Racing |
+| Jack   |         6 | Badminton    |
++--------+-----------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT Student_information.student_name, Marks_details.gpa, Marks_details.grade
+    -> FROM Student_information INNER JOIN Marks_details
+    -> ON Student_information.student_id = Marks_details.sid;
++--------------+------+-------+
+| student_name | gpa  | grade |
++--------------+------+-------+
+| Jack         |  9.8 | A+    |
+| Luke         |  9.2 | A     |
+| Owen         |    8 | B+    |
+| John         |  7.5 | B     |
+| Noah         |    6 | C+    |
+| Liam         |  5.7 | C     |
++--------------+------+-------+
+6 rows in set (0.001 sec)
+
+MariaDB [je0020]> SELECT Student_information.student_name, Student_information.age, Marks_details.gpa, Marks_details.grade
+    -> FROM Student_information INNER JOIN Marks_details
+    -> ON Student_information.student_id = Marks_details.sid AND Marks_details.gpa > 9;
++--------------+------+------+-------+
+| student_name | age  | gpa  | grade |
++--------------+------+------+-------+
+| Jack         |   19 |  9.8 | A+    |
+| Luke         |   20 |  9.2 | A     |
++--------------+------+------+-------+
+2 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT Student_information.student_name, Student_information.age, Marks_details.gpa, Attendance.perc_attendance
+    -> FROM Student_information INNER JOIN Marks_details
+    -> ON Student_information.student_id = Marks_details.sid
+    -> INNER JOIN Attendance
+    -> ON Student_information.student_id = Attendance.sid;
++--------------+------+------+-----------------+
+| student_name | age  | gpa  | perc_attendance |
++--------------+------+------+-----------------+
+| Liam         |   21 |  5.7 |               0 |
+| John         |   23 |  7.5 |            92.7 |
+| Noah         |   22 |    6 |            80.1 |
+| Owen         |   26 |    8 |            75.4 |
+| Jack         |   19 |  9.8 |            60.5 |
+| Luke         |   20 |  9.2 |            77.2 |
++--------------+------+------+-----------------+
+6 rows in set (0.001 sec)
+
+MariaDB [je0020]> insert into Student_information values('Soham',109,23);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [je0020]> SELECT * FROM Student_information;
++--------------+------------+------+
+| student_name | student_id | age  |
++--------------+------------+------+
+| Soham        |        109 |   23 |
+| Liam         |       9221 |   21 |
+| Noah         |       9222 |   22 |
+| John         |       9223 |   23 |
+| Owen         |       9224 |   26 |
+| Luke         |       9225 |   20 |
+| Jack         |       9226 |   19 |
++--------------+------------+------+
+7 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT Sports_enrollment.activity
+    -> FROM Sports_enrollment INNER JOIN Student_information
+    -> ON Student_information.student_name = Sports_enrollment.s_name;
++--------------+
+| activity     |
++--------------+
+| Table tennis |
+| Chess        |
+| Cricket      |
+| Football     |
+| Cycle Racing |
+| Badminton    |
++--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT Student_information.student_name, Student_information.student_id
+    -> FROM Student_information INNER JOIN Attendance
+    -> ON Student_information.student_id = Attendance.sid AND (Attendance.perc_attendance < 75 OR Attendance.perc_attendance = 0);
++--------------+------------+
+| student_name | student_id |
++--------------+------------+
+| Liam         |       9221 |
+| Jack         |       9226 |
++--------------+------------+
+2 rows in set (0.000 sec)

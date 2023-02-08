@@ -36,7 +36,7 @@ insert into Marks_details values(9223,7.5,'B');
 insert into Marks_details values(9222,6.0,'C+');
 insert into Marks_details values(9221,5.7,'C');
 
-insert into Attendance values(9221,100);
+insert into Attendance values(9221,0);
 insert into Attendance values(9223,92.7);
 insert into Attendance values(9222,80.1);
 insert into Attendance values(9224,75.4);
@@ -52,20 +52,20 @@ insert into Sports_enrollment values('Jack',006,'Badminton');
 
 
 -- 1.
-SELECT Student_infromation.student_name, Marks_details.gpa, Marks_details.grade
+SELECT Student_information.student_name, Marks_details.gpa, Marks_details.grade
 FROM Student_information INNER JOIN Marks_details
 ON Student_information.student_id = Marks_details.sid;
 
 -- 2.
 
 SELECT Student_information.student_name, Student_information.age, Marks_details.gpa, Marks_details.grade
-FROM Student_infomation INNER JOIN Marks_details
-ON Student_information.student_id = Marks_details.sid;
+FROM Student_information INNER JOIN Marks_details
+ON Student_information.student_id = Marks_details.sid AND Marks_details.gpa > 9;
 
 -- 3.
 
 SELECT Student_information.student_name, Student_information.age, Marks_details.gpa, Attendance.perc_attendance
-FROM Student_infomation INNER JOIN Marks_details
+FROM Student_information INNER JOIN Marks_details
 ON Student_information.student_id = Marks_details.sid
 INNER JOIN Attendance
 ON Student_information.student_id = Attendance.sid;
@@ -77,7 +77,9 @@ insert into Student_information values('Soham',109,23);
 -- 5.
 SELECT Sports_enrollment.activity
 FROM Sports_enrollment INNER JOIN Student_information
-ON Student_infomation.student_name = Sports_enrollment.s_name;
+ON Student_information.student_name = Sports_enrollment.s_name;
 
 -- 6.
-
+SELECT Student_information.student_name, Student_information.student_id
+FROM Student_information INNER JOIN Attendance
+ON Student_information.student_id = Attendance.sid AND (Attendance.perc_attendance < 75 OR Attendance.perc_attendance = 0)
