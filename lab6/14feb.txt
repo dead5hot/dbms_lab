@@ -1,0 +1,148 @@
+MariaDB [(none)]> use lab6;
+Database changed
+MariaDB [lab6]> CREATE TABLE Sailor(
+    ->     Sid int,
+    ->     Sname varchar(30),
+    ->     Rating int,
+    ->     Age real
+    -> );
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [lab6]> CREATE TABLE Reserve(
+    ->     Sid int,
+    ->     Bid int,
+    ->     Date varchar(12)
+    -> );
+Query OK, 0 rows affected (0.019 sec)
+
+MariaDB [lab6]> 
+MariaDB [lab6]> CREATE TABLE Boat(
+    ->     Bid int,
+    ->     Bname varchar(30),
+    ->     Color varchar(20)
+    -> );
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [lab6]> INSERT INTO Sailor VALUES( 22, "Dustin" ,  7  , 45   );
+Query OK, 1 row affected (0.020 sec)
+
+MariaDB [lab6]> INSERT INTO Sailor VALUES( 29, "Brutus" ,  1  , 33   );
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Sailor VALUES( 31, "Lubber" ,  8  , 55   );
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab6]> INSERT INTO Sailor VALUES( 32, "Andy"   ,  8  , 25.5 );
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Sailor VALUES(  5, "Art"    ,  3  , 25.5 );
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Sailor VALUES( 58, "Rusty"  ,  10 , 35   );
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Sailor VALUES( 64, "Rusty"  ,  10 , 35   );
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Sailor VALUES( 71, "Zorba"  ,  10 , 16   );
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Sailor VALUES( 74, "Horatio",  9  , 35   );
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Sailor VALUES( 95, "Bob"    ,  3  , 63.5 );
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 22, 101, "1998-10-10");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 22, 102, "1998-10-10");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 22, 103, "1998-08-10");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 22, 104, "1998-07-10");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 31, 102, "1998-10-11");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 31, 103, "1998-06-11");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 31, 104, "1998-12-11");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 64, 101, "1998-05-09");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 64, 102, "1998-08-09");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 74, 103, "1998-08-09");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Reserve VALUES( 95, 101, "1998-10-10");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Boat VALUES( 101, "Interlake", "Blue");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab6]> INSERT INTO Boat VALUES( 102, "Interlake", "Red");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Boat VALUES( 103, "Clipper", "Green");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab6]> INSERT INTO Boat VALUES( 104, "Marine", "Red");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab6]> SELECT * FROM Sailor;
++------+---------+--------+------+
+| Sid  | Sname   | Rating | Age  |
++------+---------+--------+------+
+|   22 | Dustin  |      7 |   45 |
+|   29 | Brutus  |      1 |   33 |
+|   31 | Lubber  |      8 |   55 |
+|   32 | Andy    |      8 | 25.5 |
+|    5 | Art     |      3 | 25.5 |
+|   58 | Rusty   |     10 |   35 |
+|   64 | Rusty   |     10 |   35 |
+|   71 | Zorba   |     10 |   16 |
+|   74 | Horatio |      9 |   35 |
+|   95 | Bob     |      3 | 63.5 |
++------+---------+--------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [lab6]> SELECT * FROM Reserve;
++------+------+------------+
+| Sid  | Bid  | Date       |
++------+------+------------+
+|   22 |  101 | 1998-10-10 |
+|   22 |  102 | 1998-10-10 |
+|   22 |  103 | 1998-08-10 |
+|   22 |  104 | 1998-07-10 |
+|   31 |  102 | 1998-10-11 |
+|   31 |  103 | 1998-06-11 |
+|   31 |  104 | 1998-12-11 |
+|   64 |  101 | 1998-05-09 |
+|   64 |  102 | 1998-08-09 |
+|   74 |  103 | 1998-08-09 |
+|   95 |  101 | 1998-10-10 |
++------+------+------------+
+11 rows in set (0.000 sec)
+
+MariaDB [lab6]> SELECT * FROM Boat;
++------+-----------+-------+
+| Bid  | Bname     | Color |
++------+-----------+-------+
+|  101 | Interlake | Blue  |
+|  102 | Interlake | Red   |
+|  103 | Clipper   | Green |
+|  104 | Marine    | Red   |
++------+-----------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [lab6]> 
+
