@@ -1,6 +1,6 @@
-MariaDB [(none)]> use lab6;
+MariaDB [(none)]> use je0020;
 Database changed
-MariaDB [lab6]> CREATE TABLE Sailor(
+MariaDB [je0020]> CREATE TABLE Sailor(
     ->     Sid int,
     ->     Sname varchar(30),
     ->     Rating int,
@@ -8,97 +8,97 @@ MariaDB [lab6]> CREATE TABLE Sailor(
     -> );
 Query OK, 0 rows affected (0.020 sec)
 
-MariaDB [lab6]> CREATE TABLE Reserve(
+MariaDB [je0020]> CREATE TABLE Reserve(
     ->     Sid int,
     ->     Bid int,
     ->     Date varchar(12)
     -> );
 Query OK, 0 rows affected (0.019 sec)
 
-MariaDB [lab6]> 
-MariaDB [lab6]> CREATE TABLE Boat(
+MariaDB [je0020]> 
+MariaDB [je0020]> CREATE TABLE Boat(
     ->     Bid int,
     ->     Bname varchar(30),
     ->     Color varchar(20)
     -> );
 Query OK, 0 rows affected (0.018 sec)
 
-MariaDB [lab6]> INSERT INTO Sailor VALUES( 22, "Dustin" ,  7  , 45   );
+MariaDB [je0020]> INSERT INTO Sailor VALUES( 22, "Dustin" ,  7  , 45   );
 Query OK, 1 row affected (0.020 sec)
 
-MariaDB [lab6]> INSERT INTO Sailor VALUES( 29, "Brutus" ,  1  , 33   );
+MariaDB [je0020]> INSERT INTO Sailor VALUES( 29, "Brutus" ,  1  , 33   );
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Sailor VALUES( 31, "Lubber" ,  8  , 55   );
+MariaDB [je0020]> INSERT INTO Sailor VALUES( 31, "Lubber" ,  8  , 55   );
 Query OK, 1 row affected (0.004 sec)
 
-MariaDB [lab6]> INSERT INTO Sailor VALUES( 32, "Andy"   ,  8  , 25.5 );
+MariaDB [je0020]> INSERT INTO Sailor VALUES( 32, "Andy"   ,  8  , 25.5 );
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Sailor VALUES(  5, "Art"    ,  3  , 25.5 );
+MariaDB [je0020]> INSERT INTO Sailor VALUES(  5, "Art"    ,  3  , 25.5 );
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Sailor VALUES( 58, "Rusty"  ,  10 , 35   );
+MariaDB [je0020]> INSERT INTO Sailor VALUES( 58, "Rusty"  ,  10 , 35   );
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Sailor VALUES( 64, "Rusty"  ,  10 , 35   );
+MariaDB [je0020]> INSERT INTO Sailor VALUES( 64, "Rusty"  ,  10 , 35   );
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Sailor VALUES( 71, "Zorba"  ,  10 , 16   );
+MariaDB [je0020]> INSERT INTO Sailor VALUES( 71, "Zorba"  ,  10 , 16   );
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Sailor VALUES( 74, "Horatio",  9  , 35   );
+MariaDB [je0020]> INSERT INTO Sailor VALUES( 74, "Horatio",  9  , 35   );
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Sailor VALUES( 95, "Bob"    ,  3  , 63.5 );
+MariaDB [je0020]> INSERT INTO Sailor VALUES( 95, "Bob"    ,  3  , 63.5 );
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 22, 101, "1998-10-10");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 22, 101, "1998-10-10");
 Query OK, 1 row affected (0.004 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 22, 102, "1998-10-10");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 22, 102, "1998-10-10");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 22, 103, "1998-08-10");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 22, 103, "1998-08-10");
 Query OK, 1 row affected (0.004 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 22, 104, "1998-07-10");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 22, 104, "1998-07-10");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 31, 102, "1998-10-11");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 31, 102, "1998-10-11");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 31, 103, "1998-06-11");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 31, 103, "1998-06-11");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 31, 104, "1998-12-11");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 31, 104, "1998-12-11");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 64, 101, "1998-05-09");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 64, 101, "1998-05-09");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 64, 102, "1998-08-09");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 64, 102, "1998-08-09");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 74, 103, "1998-08-09");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 74, 103, "1998-08-09");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Reserve VALUES( 95, 101, "1998-10-10");
+MariaDB [je0020]> INSERT INTO Reserve VALUES( 95, 101, "1998-10-10");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Boat VALUES( 101, "Interlake", "Blue");
+MariaDB [je0020]> INSERT INTO Boat VALUES( 101, "Interlake", "Blue");
 Query OK, 1 row affected (0.004 sec)
 
-MariaDB [lab6]> INSERT INTO Boat VALUES( 102, "Interlake", "Red");
+MariaDB [je0020]> INSERT INTO Boat VALUES( 102, "Interlake", "Red");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Boat VALUES( 103, "Clipper", "Green");
+MariaDB [je0020]> INSERT INTO Boat VALUES( 103, "Clipper", "Green");
 Query OK, 1 row affected (0.002 sec)
 
-MariaDB [lab6]> INSERT INTO Boat VALUES( 104, "Marine", "Red");
+MariaDB [je0020]> INSERT INTO Boat VALUES( 104, "Marine", "Red");
 Query OK, 1 row affected (0.004 sec)
 
-MariaDB [lab6]> SELECT * FROM Sailor;
+MariaDB [je0020]> SELECT * FROM Sailor;
 +------+---------+--------+------+
 | Sid  | Sname   | Rating | Age  |
 +------+---------+--------+------+
@@ -115,7 +115,7 @@ MariaDB [lab6]> SELECT * FROM Sailor;
 +------+---------+--------+------+
 10 rows in set (0.000 sec)
 
-MariaDB [lab6]> SELECT * FROM Reserve;
+MariaDB [je0020]> SELECT * FROM Reserve;
 +------+------+------------+
 | Sid  | Bid  | Date       |
 +------+------+------------+
@@ -133,7 +133,7 @@ MariaDB [lab6]> SELECT * FROM Reserve;
 +------+------+------------+
 11 rows in set (0.000 sec)
 
-MariaDB [lab6]> SELECT * FROM Boat;
+MariaDB [je0020]> SELECT * FROM Boat;
 +------+-----------+-------+
 | Bid  | Bname     | Color |
 +------+-----------+-------+
@@ -144,5 +144,205 @@ MariaDB [lab6]> SELECT * FROM Boat;
 +------+-----------+-------+
 4 rows in set (0.000 sec)
 
-MariaDB [lab6]> 
+MariaDB [je0020]> SELECT S.Sid, S.Sname
+    -> FROM Sailor S
+    -> WHERE S.Rating > ANY (
+    -> SELECT S2.Rating
+    -> FROM Sailor S2
+    -> WHERE S2.Sname = 'Art'
+    -> );
++------+---------+
+| Sid  | Sname   |
++------+---------+
+|   22 | Dustin  |
+|   31 | Lubber  |
+|   32 | Andy    |
+|   58 | Rusty   |
+|   64 | Rusty   |
+|   71 | Zorba   |
+|   74 | Horatio |
++------+---------+
+7 rows in set (0.001 sec)
 
+MariaDB [je0020]> SELECT S.Sid, S.Sname
+    -> FROM Sailor S
+    -> WHERE S.Rating >= ALL (
+    -> SELECT S2.Rating
+    -> FROM Sailor S2
+    -> );
++------+-------+
+| Sid  | Sname |
++------+-------+
+|   58 | Rusty |
+|   64 | Rusty |
+|   71 | Zorba |
++------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT S.Sid, S.Sname
+    -> FROM Sailor S
+    -> WHERE S.Rating <= ALL (
+    -> SELECT S2.Rating
+    -> FROM Sailor S2
+    -> );
++------+--------+
+| Sid  | Sname  |
++------+--------+
+|   29 | Brutus |
++------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [je0020]> SELECT *
+    -> FROM Boat B
+    -> WHERE B.Color NOT IN (
+    -> SELECT B2.Color
+    -> FROM Boat B2
+    -> WHERE B2.Color = 'Red'
+    -> );
++------+-----------+-------+
+| Bid  | Bname     | Color |
++------+-----------+-------+
+|  101 | Interlake | Blue  |
+|  103 | Clipper   | Green |
++------+-----------+-------+
+2 rows in set (0.001 sec)
+
+MariaDB [je0020]> SELECT *
+    -> FROM Boat B
+    -> WHERE B.Bname != 'Interlake';
++------+---------+-------+
+| Bid  | Bname   | Color |
++------+---------+-------+
+|  103 | Clipper | Green |
+|  104 | Marine  | Red   |
++------+---------+-------+
+2 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT *
+    -> FROM Sailor S
+    -> WHERE S.Sname IN (
+    -> 'Zorba',
+    -> 'Horatio',
+    -> 'Dustin'
+    -> );
++------+---------+--------+------+
+| Sid  | Sname   | Rating | Age  |
++------+---------+--------+------+
+|   22 | Dustin  |      7 |   45 |
+|   71 | Zorba   |     10 |   16 |
+|   74 | Horatio |      9 |   35 |
++------+---------+--------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT *
+    -> FROM Boat
+    -> WHERE Color = ANY (
+    -> SELECT Color
+    -> FROM Boat
+    -> WHERE Color = 'Red' OR Color = 'Blue' OR Color = "Black"
+    -> );
++------+-----------+-------+
+| Bid  | Bname     | Color |
++------+-----------+-------+
+|  101 | Interlake | Blue  |
+|  102 | Interlake | Red   |
+|  104 | Marine    | Red   |
++------+-----------+-------+
+3 rows in set (0.001 sec)
+
+MariaDB [je0020]> SELECT S.Sid
+    -> FROM Sailor S
+    -> WHERE S.Sid NOT IN(
+    -> SELECT R.Sid
+    -> FROM Reserve R
+    -> WHERE R.Date = "1998-06-11" OR R.Date = "1998-12-11"
+    -> );
++------+
+| Sid  |
++------+
+|   22 |
+|   29 |
+|   32 |
+|    5 |
+|   58 |
+|   64 |
+|   71 |
+|   74 |
+|   95 |
++------+
+9 rows in set (0.001 sec)
+
+MariaDB [je0020]> SELECT B.Bid
+    -> FROM Boat B
+    -> WHERE B.Bid NOT IN (
+    -> SELECT R.Bid
+    -> FROM Reserve R
+    -> WHERE R.Date BETWEEN "1998-06-11" AND "1998-12-11"
+    -> );
+Empty set (0.001 sec)
+
+MariaDB [je0020]> SELECT S.Sname
+    -> FROM Sailor S
+    -> WHERE S.Rating BETWEEN 7 AND 10;
++---------+
+| Sname   |
++---------+
+| Dustin  |
+| Lubber  |
+| Andy    |
+| Rusty   |
+| Rusty   |
+| Zorba   |
+| Horatio |
++---------+
+7 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT S.Sname
+    -> FROM Sailor S
+    -> WHERE S.Age NOT BETWEEN 25 AND 40;
++--------+
+| Sname  |
++--------+
+| Dustin |
+| Lubber |
+| Zorba  |
+| Bob    |
++--------+
+4 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT *
+    -> FROM Sailor S
+    -> WHERE EXISTS (
+    -> SELECT *
+    -> FROM Reserve R
+    -> WHERE R.Sid = S.Sid
+    -> );
++------+---------+--------+------+
+| Sid  | Sname   | Rating | Age  |
++------+---------+--------+------+
+|   22 | Dustin  |      7 |   45 |
+|   31 | Lubber  |      8 |   55 |
+|   64 | Rusty   |     10 |   35 |
+|   74 | Horatio |      9 |   35 |
+|   95 | Bob     |      3 | 63.5 |
++------+---------+--------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT S.Sname FROM Sailor S WHERE S.Sid IN ( SELECT R.Sid FROM Reserve R WHERE R.Bid IN ( SELECT B.Bid FROM Boat B WHERE B.Color
+= 'Red' AND B.Color NOT IN ( SELECT B1.Bid FROM Boat B1 WHERE B1.Color = 'Black' ) ) );
++--------+
+| Sname  |
++--------+
+| Dustin |
+| Lubber |
+| Rusty  |
++--------+
+3 rows in set (0.001 sec)
+
+MariaDB [je0020]> SELECT S.Sname FROM Sailor S WHERE NOT EXISTS ( SELECT * FROM Boat B WHERE NOT EXISTS ( SELECT * FROM Reserve R WHERE R.Sid = S.Sid AND R.Bid = B.Bid )  );
++--------+
+| Sname  |
++--------+
+| Dustin |
++--------+
+1 row in set (0.001 sec)

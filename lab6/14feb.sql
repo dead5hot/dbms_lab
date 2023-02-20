@@ -111,7 +111,76 @@ WHERE S.Sname IN (
 
 -- 7.
 SELECT *
-FROM Boat B
+FROM Boat
 WHERE Color = ANY (
-	Color = 'Red' OR Color = 'Blue' OR Color = 'Black'
+	SELECT Color
+	FROM Boat
+	WHERE Color = 'Red' OR Color = 'Blue' OR Color = "Black"
 );
+
+-- 8.
+SELECT S.Sid
+FROM Sailor S
+WHERE S.Sid NOT IN(
+	SELECT R.Sid
+	FROM Reserve R
+	WHERE R.Date = "1998-06-11" OR R.Date = "1998-12-11"
+);
+
+-- 9.
+SELECT B.Bid
+FROM Boat B
+WHERE B.Bid NOT IN (
+	SELECT R.Bid
+	FROM Reserve R
+	WHERE R.Date BETWEEN "1998-06-11" AND "1998-12-11"
+);
+
+-- 10.
+SELECT S.Sname
+FROM Sailor S
+WHERE S.Rating BETWEEN 7 AND 10;
+
+-- 11.
+SELECT S.Sname
+FROM Sailor S
+WHERE S.Age NOT BETWEEN 25 AND 40;
+
+-- 12.
+SELECT *
+FROM Sailor S
+WHERE EXISTS (
+	SELECT *
+	FROM Reserve R
+	WHERE R.Sid = S.Sid
+);
+
+-- 13.
+SELECT S.Sname
+FROM Sailor S
+WHERE S.Sid IN (
+	SELECT R.Sid
+	FROM Reserve R
+	WHERE R.Bid IN (
+		SELECT B.Bid
+		FROM Boat B
+		WHERE B.Color = 'Red' AND B.Color NOT IN (
+			SELECT B1.Bid
+			FROM Boat B1
+			WHERE B1.Color = 'Black'
+		)
+	)
+);
+
+-- 14.
+SELECT S.Sname
+FROM Sailor S
+WHERE NOT EXISTS (
+	SELECT *
+	FROM Boat B
+	WHERE NOT EXISTS (
+		SELECT *
+		FROM Reserve R
+		WHERE R.Sid = S.Sid AND R.Bid = B.Bid
+	)
+ );
