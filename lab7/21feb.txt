@@ -1,0 +1,388 @@
+MariaDB [(none)]> use lab7;
+Database changed
+MariaDB [lab7]> CREATE TABLE Sailor(
+    ->         Sid int,
+    ->         Sname varchar(30),
+    ->         Rating int,
+    ->         Age real,
+    ->         PRIMARY KEY(Sid)
+    -> );
+Query OK, 0 rows affected (0.035 sec)
+
+MariaDB [lab7]> CREATE TABLE Boat(
+    ->         Bid int,
+    ->         Bname varchar(30),
+    ->         Color varchar(20),
+    ->         PRIMARY KEY(Bid)
+    -> );
+Query OK, 0 rows affected (0.036 sec)
+
+MariaDB [lab7]> CREATE TABLE Reserve(
+    ->         Sid int,
+    ->         Bid int,
+    ->         Date date,
+    ->         FOREIGN KEY(Sid) REFERENCES Sailor(Sid),
+    ->         FOREIGN KEY(Bid) REFERENCES Boat(Bid)
+    -> );
+Query OK, 0 rows affected (0.043 sec)
+
+MariaDB [lab7]> INSERT INTO Sailor VALUES( 22, "Dustin" ,  7  , 45   );
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Sailor VALUES( 29, "Brutus" ,  1  , 33   );
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [lab7]> INSERT INTO Sailor VALUES( 31, "Lubber" ,  8  , 55   );
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [lab7]> INSERT INTO Sailor VALUES( 32, "Andy"   ,  8  , 25.5 );
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Sailor VALUES(  5, "Art"    ,  3  , 25.5 );
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [lab7]> INSERT INTO Sailor VALUES( 58, "Rusty"  ,  10 , 35   );
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Sailor VALUES( 64, "Rusty"  ,  10 , 35   );
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Sailor VALUES( 71, "Zorba"  ,  10 , 16   );
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [lab7]> INSERT INTO Sailor VALUES( 74, "Horatio",  9  , 35   );
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [lab7]> INSERT INTO Sailor VALUES( 95, "Bob"    ,  3  , 63.5 );
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Boat VALUES( 101, "Interlake", "Blue");
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [lab7]> INSERT INTO Boat VALUES( 102, "Interlake", "Red");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Boat VALUES( 103, "Clipper", "Green");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Boat VALUES( 104, "Marine", "Red");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 22, 101, "1998-10-10");
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 22, 102, "1998-10-10");
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 22, 103, "1998-08-10");
+Query OK, 1 row affected (0.016 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 22, 104, "1998-07-10");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 31, 102, "1998-10-11");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 31, 103, "1998-06-11");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 31, 104, "1998-12-11");
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 64, 101, "1998-05-09");
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 64, 102, "1998-08-09");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 74, 103, "1998-08-09");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> INSERT INTO Reserve VALUES( 95, 101, "1998-10-10");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> SELECT * FROM Sailor;
++-----+---------+--------+------+
+| Sid | Sname   | Rating | Age  |
++-----+---------+--------+------+
+|   5 | Art     |      3 | 25.5 |
+|  22 | Dustin  |      7 |   45 |
+|  29 | Brutus  |      1 |   33 |
+|  31 | Lubber  |      8 |   55 |
+|  32 | Andy    |      8 | 25.5 |
+|  58 | Rusty   |     10 |   35 |
+|  64 | Rusty   |     10 |   35 |
+|  71 | Zorba   |     10 |   16 |
+|  74 | Horatio |      9 |   35 |
+|  95 | Bob     |      3 | 63.5 |
++-----+---------+--------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [lab7]> SELECT * FROM Reserve;
++------+------+------------+
+| Sid  | Bid  | Date       |
++------+------+------------+
+|   22 |  101 | 1998-10-10 |
+|   22 |  102 | 1998-10-10 |
+|   22 |  103 | 1998-08-10 |
+|   22 |  104 | 1998-07-10 |
+|   31 |  102 | 1998-10-11 |
+|   31 |  103 | 1998-06-11 |
+|   31 |  104 | 1998-12-11 |
+|   64 |  101 | 1998-05-09 |
+|   64 |  102 | 1998-08-09 |
+|   74 |  103 | 1998-08-09 |
+|   95 |  101 | 1998-10-10 |
++------+------+------------+
+11 rows in set (0.000 sec)
+
+MariaDB [lab7]> SELECT * FROM Boat;
++-----+-----------+-------+
+| Bid | Bname     | Color |
++-----+-----------+-------+
+| 101 | Interlake | Blue  |
+| 102 | Interlake | Red   |
+| 103 | Clipper   | Green |
+| 104 | Marine    | Red   |
++-----+-----------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [lab7]> -- 1.
+MariaDB [lab7]> SELECT AVG(Age)
+    -> FROM Sailor;
++----------+
+| AVG(Age) |
++----------+
+|    36.85 |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [lab7]> -- 2.
+MariaDB [lab7]> SELECT AVG(Age)
+    -> FROM Sailor
+    -> WHERE Rating = 10;
++--------------------+
+| AVG(Age)           |
++--------------------+
+| 28.666666666666668 |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [lab7]> -- 3.
+MariaDB [lab7]> SELECT S.Sname, S.Age
+    -> FROM Sailor S
+    -> WHERE S.Age >= ALL (
+    -> SELECT S1.Age
+    -> FROM Sailor S1
+    -> );
++-------+------+
+| Sname | Age  |
++-------+------+
+| Bob   | 63.5 |
++-------+------+
+1 row in set (0.000 sec)
+
+MariaDB [lab7]> -- 4.
+MariaDB [lab7]> SELECT COUNT(Sid)
+    -> FROM Sailor;
++------------+
+| COUNT(Sid) |
++------------+
+|         10 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [lab7]> -- 5.
+MariaDB [lab7]> SELECT COUNT(DISTINCT(Sname))
+    -> FROM Sailor;
++------------------------+
+| COUNT(DISTINCT(Sname)) |
++------------------------+
+|                      9 |
++------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [lab7]> -- 6.
+MariaDB [lab7]> SELECT S.Sname, S.Age
+    -> FROM Sailor S
+    -> WHERE S.Age > ALL (
+    -> SELECT S1.Age
+    -> FROM Sailor S1
+    -> WHERE S1.Rating = 10
+    -> );
++--------+------+
+| Sname  | Age  |
++--------+------+
+| Dustin |   45 |
+| Lubber |   55 |
+| Bob    | 63.5 |
++--------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [lab7]> CREATE TABLE Student_information(
+    -> sname varchar(30),
+    -> sid int,
+    -> age real,
+    -> PRIMARY KEY(sid)
+    -> );
+Query OK, 0 rows affected (0.037 sec)
+
+MariaDB [lab7]> CREATE TABLE Marks_details(
+    -> sid int,
+    -> cid varchar(6),
+    -> gpa real,
+    -> grade varchar(3),
+    -> FOREIGN KEY(sid) REFERENCES Student_information(sid)
+    -> );
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [lab7]> CREATE TABLE Attendance(
+    -> sid int,
+    -> perc_attend real,
+    -> FOREIGN KEY(sid) REFERENCES Student_information(sid)
+    -> );
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [lab7]> insert into Student_information values('Liam',9221,21);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [lab7]> insert into Student_information values('Noah',9222,22);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Student_information values('John',9223,23);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> insert into Student_information values('Owen',9224,26);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> insert into Student_information values('Owen',9228,18);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [lab7]> insert into Student_information values('Luke',9225,20);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Student_information values('Jack',9226,19);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Marks_details values(9226,'md001',9.8,'A+');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Marks_details values(9225,'ms002',9.2,'A');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Marks_details values(9224,'ms002',8.0,'B+');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Marks_details values(9223,'md001',7.5,'B');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Marks_details values(9222,'hs001',6.0,'C+');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Marks_details values(9221,'hs001',5.7,'C');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Marks_details values(9228,'hs002',7.7,'B+');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Attendance values(9221,0);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Attendance values(9223,92.7);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Attendance values(9222,80.1);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [lab7]> insert into Attendance values(9224,75.4);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Attendance values(9226,60.5);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Attendance values(9225,77.2);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> insert into Attendance values(9228,88.2);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [lab7]> -- 1.
+MariaDB [lab7]> SELECT COUNT(Sid)
+    -> FROM Marks_details
+    -> WHERE grade = 'A';
++------------+
+| COUNT(Sid) |
++------------+
+|          1 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [lab7]> -- 2.
+MariaDB [lab7]> SELECT COUNT(Sid)
+    -> FROM Marks_details
+    -> WHERE gpa > (
+    -> SELECT AVG(gpa)
+    -> FROM Marks_details
+    -> );
++------------+
+| COUNT(Sid) |
++------------+
+|          3 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [lab7]> -- 3.
+MariaDB [lab7]> SELECT COUNT(DISTINCT(sname))
+    -> FROM Student_information;
++------------------------+
+| COUNT(DISTINCT(sname)) |
++------------------------+
+|                      6 |
++------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [lab7]> -- 4.
+MariaDB [lab7]> SELECT SI.sname
+    -> FROM Student_information SI, Attendance A
+    -> WHERE SI.sid = A.sid AND A.perc_attend = (
+    -> SELECT MIN(A1.perc_attend)
+    -> FROM Attendance A1
+    -> );
++-------+
+| sname |
++-------+
+| Liam  |
++-------+
+1 row in set (0.000 sec)
+
+MariaDB [lab7]> -- 5.
+MariaDB [lab7]> SELECT SI.sname
+    -> FROM Student_information SI, Attendance A
+    -> WHERE SI.sid = A.sid AND A.perc_attend = (
+    -> SELECT MAX(A1.perc_attend)
+    -> FROM Attendance A1
+    -> );
++-------+
+| sname |
++-------+
+| John  |
++-------+
+1 row in set (0.000 sec)
+
+MariaDB [lab7]> -- 6.
+MariaDB [lab7]> SELECT MD.gpa, SI.age
+    -> FROM Marks_details MD, Student_information SI, Attendance A
+    -> WHERE MD.sid = SI.sid AND SI.sid = A.sid AND A.perc_attend > (
+    -> SELECT AVG(A1.perc_attend)
+    -> FROM Attendance A1
+    -> );
++------+------+
+| gpa  | age  |
++------+------+
+|  7.5 |   23 |
+|    6 |   22 |
+|    8 |   26 |
+|  9.2 |   20 |
+|  7.7 |   18 |
++------+------+
+5 rows in set (0.000 sec)

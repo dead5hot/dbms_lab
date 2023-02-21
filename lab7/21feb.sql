@@ -137,7 +137,6 @@ insert into Attendance values(9226,60.5);
 insert into Attendance values(9225,77.2);
 insert into Attendance values(9228,88.2);
 
-*/
 
 -- 1.
 SELECT COUNT(Sid)
@@ -179,3 +178,5 @@ WHERE MD.sid = SI.sid AND SI.sid = A.sid AND A.perc_attend > (
 	SELECT AVG(A1.perc_attend)
 	FROM Attendance A1
 );
+
+*/
