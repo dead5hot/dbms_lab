@@ -306,6 +306,48 @@ Query OK, 1 row affected (0.002 sec)
 MariaDB [lab7]> insert into Attendance values(9228,88.2);
 Query OK, 1 row affected (0.002 sec)
 
+MariaDB [lab7]> SELECT * FROM Student_information;
++-------+------+------+
+| sname | sid  | age  |
++-------+------+------+
+| Liam  | 9221 |   21 |
+| Noah  | 9222 |   22 |
+| John  | 9223 |   23 |
+| Owen  | 9224 |   26 |
+| Luke  | 9225 |   20 |
+| Jack  | 9226 |   19 |
+| Owen  | 9228 |   18 |
++-------+------+------+
+7 rows in set (0.000 sec)
+
+MariaDB [lab7]> SELECT * FROM Marks_details;
++------+-------+------+-------+
+| sid  | cid   | gpa  | grade |
++------+-------+------+-------+
+| 9226 | md001 |  9.8 | A+    |
+| 9225 | ms002 |  9.2 | A     |
+| 9224 | ms002 |    8 | B+    |
+| 9223 | md001 |  7.5 | B     |
+| 9222 | hs001 |    6 | C+    |
+| 9221 | hs001 |  5.7 | C     |
+| 9228 | hs002 |  7.7 | B+    |
++------+-------+------+-------+
+7 rows in set (0.000 sec)
+
+MariaDB [lab7]> SELECT * FROM Attendance;
++------+-------------+
+| sid  | perc_attend |
++------+-------------+
+| 9221 |           0 |
+| 9223 |        92.7 |
+| 9222 |        80.1 |
+| 9224 |        75.4 |
+| 9226 |        60.5 |
+| 9225 |        77.2 |
+| 9228 |        88.2 |
++------+-------------+
+7 rows in set (0.000 sec)
+
 MariaDB [lab7]> -- 1.
 MariaDB [lab7]> SELECT COUNT(Sid)
     -> FROM Marks_details

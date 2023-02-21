@@ -137,6 +137,9 @@ insert into Attendance values(9226,60.5);
 insert into Attendance values(9225,77.2);
 insert into Attendance values(9228,88.2);
 
+SELECT * FROM Student_information;
+SELECT * FROM Marks_details;
+SELECT * FROM Attendance;
 
 -- 1.
 SELECT COUNT(Sid)
