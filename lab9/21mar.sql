@@ -50,30 +50,87 @@ INSERT Works VALUES(115,62,100);
 INSERT Works VALUES(116,46,90);
 INSERT Works VALUES(106,46,100);
 
+SELECT * FROM Emp;
+SELECT * FROM Works;
+SELECT * FROM Dept;
+
 -- 1.
+-- SELECT e.ename, e.age
+-- FROM Emp e, Works w, Works w1
+-- WHERE e.eid = w.eid && w.did = 50 && w1.did = 62 && w1.eid = w.eid;
+
+gpt:
 SELECT e.ename, e.age
-FROM Emp e, Works w, Works w1
-WHERE e.eid = w.eid && w.did = 50 && w1.did = 62 && w1.eid = w.eid;
+FROM Emp e
+JOIN Works w1 ON e.eid = w1.eid AND w1.did = 50
+JOIN Works w2 ON e.eid = w2.eid AND w2.did = 62;
 
 
 -- 2.
-SELECT did, COUNT(eid)
+SELECT did, COUNT(eid) as num_employees
 FROM Works
 GROUP BY did;
 
+gpt:
+-- SELECT d.did, COUNT(w.eid) as num_employees
+-- FROM Dept d
+-- LEFT JOIN Works w ON d.did = w.did
+-- GROUP BY d.did;
+
 
 -- 3.
-SELECT eid, SUM(budget)
-FROM Dept JOIN Works
+SELECT eid, SUM(budget) as budget_total
+FROM Dept d
+JOIN Works w ON d.did = w.did
 GROUP BY eid;
+
+gpt:
+-- SELECT e.eid, SUM(d.budget) as budget_total
+-- FROM Emp e
+-- JOIN Works w ON e.eid = w.eid
+-- JOIN Dept d ON w.did = d.did
+-- GROUP BY e.eid;
 
 
 -- 4.
-SELECT eid
-FROM (Dept JOIN Works) JOIN Emp
-GROUP BY eid && (salary > SUM(budget));
+SELECT ename
+FROM Emp E
+WHERE E.salary > ANY(
+	SELECT SUM(D.budget)
+	FROM Works W,Dept D
+	WHERE W.did=D.did AND E.eid=W.eid
+	GROUP BY W.eid
+);
 
+gpt:
+-- SELECT e.ename
+-- FROM Emp e
+-- JOIN Works w ON e.eid = w.eid
+-- JOIN Dept d ON w.did = d.did
+-- WHERE e.salary > (
+-- 	SELECT SUM(d.budget)
+-- 	FROM Dept d
+-- 	JOIN Works w2 ON d.did = w2.did 
+-- 	WHERE w2.eid = e.eid
+-- )
+-- GROUP BY e.eid;
 
 -- 5.
+gpt:
+SELECT managerid
+FROM Dept
+GROUP BY managerid
+HAVING MIN(budget) > 100000;
+
 -- 6.
+gpt:
+SELECT managerid
+FROM Dept
+WHERE budget = (SELECT MAX(budget) FROM Dept);
+
 -- 7.
+gpt:
+SELECT d.managerid
+FROM Dept d
+GROUP BY d.managerid
+HAVING SUM(d.budget) > 80000;
