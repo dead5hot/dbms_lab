@@ -1,0 +1,137 @@
+MariaDB [lab9]> SELECT * FROM Emp;
++-----+--------+------+--------+
+| eid | ename  | age  | salary |
++-----+--------+------+--------+
+| 106 | Kumar  |   25 |  56000 |
+| 107 | Smita  |   24 |  52000 |
+| 109 | Ranit  |   29 |  64000 |
+| 110 | Vishal |   28 |  45000 |
+| 112 | Udita  |   24 |  60000 |
+| 113 | Nitesh |   26 |  53000 |
+| 115 | Abhay  |   26 |  50000 |
+| 116 | Om     |   23 |  80000 |
++-----+--------+------+--------+
+8 rows in set (0.000 sec)
+
+MariaDB [lab9]> SELECT * FROM Works;
++-----+-----+----------+
+| eid | did | pct_time |
++-----+-----+----------+
+| 106 |  46 |      100 |
+| 106 |  47 |       15 |
+| 106 |  48 |       85 |
+| 109 |  50 |       75 |
+| 109 |  62 |       25 |
+| 112 |  62 |       55 |
+| 112 |  63 |       45 |
+| 113 |  62 |       35 |
+| 115 |  62 |      100 |
+| 116 |  46 |       90 |
++-----+-----+----------+
+10 rows in set (0.000 sec)
+
+MariaDB [lab9]> SELECT * FROM Dept;
++-----+--------+-----------+
+| did | budget | managerid |
++-----+--------+-----------+
+|  46 |  60000 |        63 |
+|  47 |  50000 |        69 |
+|  48 |  60000 |        75 |
+|  50 | 100000 |        85 |
+|  62 | 100000 |        65 |
+|  63 | 500000 |        75 |
++-----+--------+-----------+
+6 rows in set (0.000 sec)
+
+MariaDB [lab9]> -- 1.
+MariaDB [lab9]> SELECT e.ename, e.age
+    -> FROM Emp e
+    -> JOIN Works w1 ON e.eid = w1.eid AND w1.did = 50
+    -> JOIN Works w2 ON e.eid = w2.eid AND w2.did = 62;
++-------+------+
+| ename | age  |
++-------+------+
+| Ranit |   29 |
++-------+------+
+1 row in set (0.001 sec)
+
+MariaDB [lab9]> -- 2.
+MariaDB [lab9]> SELECT did, COUNT(eid) as num_employees
+    -> FROM Works
+    -> GROUP BY did;
++-----+---------------+
+| did | num_employees |
++-----+---------------+
+|  46 |             2 |
+|  47 |             1 |
+|  48 |             1 |
+|  50 |             1 |
+|  62 |             4 |
+|  63 |             1 |
++-----+---------------+
+6 rows in set (0.000 sec)
+
+MariaDB [lab9]> -- 3.
+MariaDB [lab9]> SELECT eid, SUM(budget) as budget_total
+    -> FROM Dept d
+    -> JOIN Works w ON d.did = w.did
+    -> GROUP BY eid;
++-----+--------------+
+| eid | budget_total |
++-----+--------------+
+| 106 |       170000 |
+| 109 |       200000 |
+| 112 |       600000 |
+| 113 |       100000 |
+| 115 |       100000 |
+| 116 |        60000 |
++-----+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [lab9]> -- 4.
+MariaDB [lab9]> SELECT ename
+    -> FROM Emp E
+    -> WHERE E.salary > ANY(
+    -> SELECT SUM(D.budget)
+    -> FROM Works W,Dept D
+    -> WHERE W.did=D.did AND E.eid=W.eid
+    -> GROUP BY W.eid
+    -> );
++-------+
+| ename |
++-------+
+| Om    |
++-------+
+1 row in set (0.001 sec)
+
+MariaDB [lab9]> -- 5.
+MariaDB [lab9]> SELECT managerid
+    -> FROM Dept
+    -> GROUP BY managerid
+    -> HAVING MIN(budget) > 100000;
+Empty set (0.000 sec)
+
+MariaDB [lab9]> -- 6.
+MariaDB [lab9]> SELECT managerid
+    -> FROM Dept
+    -> WHERE budget = (SELECT MAX(budget) FROM Dept);
++-----------+
+| managerid |
++-----------+
+|        75 |
++-----------+
+1 row in set (0.000 sec)
+
+MariaDB [lab9]> -- 7.
+MariaDB [lab9]> SELECT d.managerid
+    -> FROM Dept d
+    -> GROUP BY d.managerid
+    -> HAVING SUM(d.budget) > 80000;
++-----------+
+| managerid |
++-----------+
+|        65 |
+|        75 |
+|        85 |
++-----------+
+3 rows in set (0.000 sec)
