@@ -1,0 +1,144 @@
+MariaDB [je0020]> SELECT * FROM Flights;
++------+-----------+-----------+----------+----------+----------+-------+
+| flno | from_city | to_city   | distance | departs  | arrives  | price |
++------+-----------+-----------+----------+----------+----------+-------+
+|  105 | Kolkata   | Mumbai    |     1080 | 04:30:00 | 06:30:00 |  5250 |
+|  106 | Kolkata   | Bengaluru |     1095 | 07:30:00 | 10:30:00 |  6250 |
+|  107 | Chennai   | Bengaluru |      565 | 08:30:00 | 09:45:00 |  3250 |
+|  108 | Ranchi    | Kolkata   |      425 | 10:50:00 | 12:45:00 |  4355 |
+|  109 | Kolkata   | Delhi     |     1525 | 13:50:00 | 16:45:00 |  6355 |
++------+-----------+-----------+----------+----------+----------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT * FROM Aircraft;
++-----+-------------+---------------+
+| aid | aname       | cruisingrange |
++-----+-------------+---------------+
+| 201 | Boeing_717  |          1500 |
+| 202 | Boeing_757  |          1700 |
+| 203 | Boeing_767  |          1800 |
+| 204 | Boeing_777  |          2000 |
+| 205 | Boeing_787  |          1900 |
+| 208 | Airbus_A330 |          3200 |
+| 209 | Airbus_A350 |          3100 |
++-----+-------------+---------------+
+7 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT * FROM Certified;
++------+------+
+| eid  | aid  |
++------+------+
+|  505 |  201 |
+|  505 |  203 |
+|  506 |  205 |
+|  508 |  203 |
+|  505 |  204 |
+|  505 |  202 |
+|  505 |  204 |
+|  502 |  203 |
+|  502 |  204 |
+|  502 |  205 |
+|  502 |  201 |
+|  501 |  208 |
++------+------+
+12 rows in set (0.000 sec)
+
+MariaDB [je0020]> SELECT * FROM Employees;
++------+-----------+--------+
+| eid  | ename     | salary |
++------+-----------+--------+
+|  501 | Jhon      |  79000 |
+|  502 | Harry     |  89000 |
+|  503 | Nick      |  75000 |
+|  504 | Bill      |  72000 |
+|  505 | Smith     |  75000 |
+|  506 | Ananya    |  85000 |
+|  507 | Arundhati |  78000 |
+|  508 | Nilesh    |  82000 |
++------+-----------+--------+
+8 rows in set (0.000 sec)
+
+MariaDB [je0020]> -- 1.
+MariaDB [je0020]> SELECT distinct aname
+    -> FROM Aircraft
+    -> NATURAL JOIN Certified
+    -> NATURAL JOIN Employees
+    -> WHERE salary> 80000 AND aid NOT IN (
+    -> SELECT aid
+    -> FROM Aircraft
+    -> NATURAL JOIN Certified
+    -> NATURAL JOIN Employees
+    -> WHERE salary <= 80000
+    -> );
++------------+
+| aname      |
++------------+
+| Boeing_787 |
++------------+
+1 row in set (0.001 sec)
+
+MariaDB [je0020]> -- 2.
+MariaDB [je0020]> SELECT C.eid, MAX(cruisingrange)
+    -> FROM Certified C, Aircraft A
+    -> WHERE C.aid = A.aid
+    -> GROUP BY C.eid
+    -> HAVING COUNT(*) > 3;
++------+--------------------+
+| eid  | MAX(cruisingrange) |
++------+--------------------+
+|  502 |               2000 |
+|  505 |               2000 |
++------+--------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [je0020]> -- 3.
+MariaDB [je0020]> SELECT A.aname, AVG(E.salary)
+    -> FROM Aircraft A, Employees E, Certified C
+    -> WHERE A.aid = C.aid AND E.eid = C.eid AND A.cruisingrange > 1700
+    -> GROUP BY C.aid;
++-------------+---------------+
+| aname       | AVG(E.salary) |
++-------------+---------------+
+| Boeing_767  |    82000.0000 |
+| Boeing_777  |    79666.6667 |
+| Boeing_787  |    87000.0000 |
+| Airbus_A330 |    79000.0000 |
++-------------+---------------+
+4 rows in set (0.001 sec)
+
+MariaDB [je0020]> -- 4.
+MariaDB [je0020]> SELECT distinct E.ename
+    -> FROM Aircraft A, Employees E, Certified C
+    -> WHERE A.aid = C.aid AND E.eid = C.eid AND A.aname = 'Boeing_777';
++-------+
+| ename |
++-------+
+| Smith |
+| Harry |
++-------+
+2 rows in set (0.001 sec)
+
+MariaDB [je0020]> -- 5.
+MariaDB [je0020]> SELECT distinct E.ename
+    -> FROM Aircraft A, Employees E, Certified C
+    -> WHERE A.aid = C.aid AND E.eid = C.eid AND A.aname LIKE 'Boeing%';
++--------+
+| ename  |
++--------+
+| Smith  |
+| Ananya |
+| Nilesh |
+| Harry  |
++--------+
+4 rows in set (0.001 sec)
+
+MariaDB [je0020]> -- 6.
+MariaDB [je0020]> SELECT distinct E.ename
+    -> FROM Aircraft A, Employees E, Certified C
+    -> WHERE A.aid = C.aid AND E.eid = C.eid AND A.cruisingrange > 3000 AND A.aname NOT LIKE 'Boeing%';
++-------+
+| ename |
++-------+
+| Jhon  |
++-------+
+1 row in set (0.001 sec)

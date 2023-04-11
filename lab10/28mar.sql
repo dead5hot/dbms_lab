@@ -68,20 +68,44 @@ SELECT * FROM Employees;
 
 
 -- 1.
-SELECT DISTINCT  A.aname
-FROM  Aircraft A
-WHERE  A.Aid IN(
-	SELECT C.aid
-	FROM Certified C, Employees E
-	WHERE C.eid = E.eid AND NOT EXISTS(
-		SELECT *
-		FROM Employees E1
-		WHERE E1.eid = E.eid AND E1.salary < 80000
-));
+SELECT distinct aname
+FROM Aircraft
+NATURAL JOIN Certified
+NATURAL JOIN Employees
+WHERE salary> 80000 AND aid NOT IN (
+	SELECT aid
+	FROM Aircraft
+	NATURAL JOIN Certified
+	NATURAL JOIN Employees
+	WHERE salary <= 80000
+);
 
+
+-- 2.
+SELECT C.eid, MAX(cruisingrange)
+FROM Certified C, Aircraft A
+WHERE C.aid = A.aid
+GROUP BY C.eid
+HAVING COUNT(*) > 3;
+
+
+-- 3.
+SELECT A.aname, AVG(E.salary)
+FROM Aircraft A, Employees E, Certified C
+WHERE A.aid = C.aid AND E.eid = C.eid AND A.cruisingrange > 1700
+GROUP BY C.aid;
 
 -- 4.
-SELECT ename
-FROM Employees e
-JOIN Certified c IN c.eid = e.eid
-JOIN Aircraft a IN a.aid = c.aid;
+SELECT distinct E.ename
+FROM Aircraft A, Employees E, Certified C
+WHERE A.aid = C.aid AND E.eid = C.eid AND A.aname = 'Boeing_777';
+
+-- 5.
+SELECT distinct E.ename
+FROM Aircraft A, Employees E, Certified C
+WHERE A.aid = C.aid AND E.eid = C.eid AND A.aname LIKE 'Boeing%';
+
+-- 6.
+SELECT distinct E.ename
+FROM Aircraft A, Employees E, Certified C
+WHERE A.aid = C.aid AND E.eid = C.eid AND A.cruisingrange > 3000 AND A.aname NOT LIKE 'Boeing%';
