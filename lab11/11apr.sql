@@ -46,16 +46,19 @@ CREATE TABLE Marks(
 	per real
 );
 
+SELECT * FROM Marks;
 
 CREATE TRIGGER Total_Marks_Calculator
 BEFORE INSERT ON
-STUDENT FOR EACH ROW SET
+Marks FOR EACH ROW SET
 new.total = new.subj1 + new.subj2 + new.subj3,
 new.per = new.total * 100 / 300;
 
 
-INSERT INTO Marks VALUES( 100,'Liam',75);
-INSERT INTO Marks VALUES( 101,'Noah',65);
-INSERT INTO Marks VALUES( 102,'Emma',85);
-INSERT INTO Marks VALUES( 103,'Levi',95);
-INSERT INTO Marks VALUES( 104,'Jack',45);
+INSERT INTO Marks VALUES(100,'Liam',75,54,74,0,0);
+INSERT INTO Marks VALUES(101,'Noah',65,74,87,0,0);
+INSERT INTO Marks VALUES(102,'Emma',85,84,97,0,0);
+INSERT INTO Marks VALUES(103,'Levi',95,49,87,0,0);
+INSERT INTO Marks VALUES(104,'Jack',45,29,37,0,0);
+
+SELECT * FROM Marks;
